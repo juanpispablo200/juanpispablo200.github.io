@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Aniversario</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: 'Georgia', serif;
+  }
+  .carta {
+    background: #fff;
+    border-radius: 20px;
+    padding: 45px;
+    max-width: 520px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    text-align: center;
+    border: 2px solid #ffc0cb;
+  }
+  .carta h1 {
+    color: #d6336c;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .carta p {
+    font-size: 19px;
+    color: #4a4a4a;
+    line-height: 1.8;
+    margin: 18px 0;
+  }
+  .corazon {
+    font-size: 48px;
+    animation: latido 1.3s infinite;
+  }
+  @keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .firma {
+    margin-top: 25px;
+    font-style: italic;
+    color: #d6336c;
+  }
+</style>
+</head>
+<body>
+  <div class="carta">
+    <div class="corazon">💖</div>
+    <h1>Feliz Aniversario</h1>
+    <p>Hola mi amor, ¿cómo estás?</p>
+    <p>Hoy se cumple un año desde que la vida me regaló la mejor compañía: la tuya. Cada día a tu lado ha sido un pedacito de felicidad que no cambiaría por nada.</p>
+    <p>Gracias por tu amor, por tu paciencia y por quedarte incluso en los días difíciles.</p>
+    <p>Te amo con todo mi corazón. Que tengamos un día tan hermoso como lo eres tú. 💕</p>
+    <p class="firma">Con todo mi amor, hoy y siempre.</p>
+  </div>
+</body>
+</html>
