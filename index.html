@@ -1,42 +1,204 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Feliz Aniversario</title>
-<style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #ffd6e7, #ffb3d1);
-    font-family: Georgia, serif;
-  }
-  .carta {
-    background: #fff;
-    max-width: 340px;
-    margin: 20px;
-    padding: 30px 24px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    text-align: center;
-  }
-  .corazon {
-    font-size: 60px;
-    animation: latido 1.2s infinite;
-  }
-  @keyframes latido {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-  }
-  h1 { color: #e0457b; margin: 10px 0 20px; }
-  p { color: #444; line-height: 1.6; font-size: 17px; }
-  .firma { color: #e0457b; font-style: italic; margin-top: 25px; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página de felicitación - Feliz Aniversario">
+  <title>Feliz Aniversario</title>
+  <style>
+    :root{
+      --bg1:#ffd6e7;
+      --bg2:#ffb3d1;
+      --accent:#e0457b;
+      --card-bg:#fff;
+      --text:#333;
+      --radius:20px;
+      --max-width:720px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      font-family: Georgia, "Times New Roman", Times, serif;
+      color:var(--text);
+      padding:24px;
+    }
+    .carta{
+      background:var(--card-bg);
+      width:100%;
+      max-width:var(--max-width);
+      padding:36px 32px;
+      border-radius:var(--radius);
+      box-shadow:0 18px 40px rgba(0,0,0,0.12);
+      text-align:center;
+      box-sizing:border-box;
+      position:relative;
+      overflow:hidden;
+    }
+    .corazon{
+      display:inline-block;
+      font-size:84px;
+      line-height:1;
+      transform-origin:center;
+      animation:latido 1.2s infinite ease-in-out;
+      margin-bottom:8px;
+      user-select:none;
+    }
+    @keyframes latido{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.18)}
+    }
+    h1{
+      color:var(--accent);
+      margin:8px 0 18px;
+      font-size:32px;
+      letter-spacing:0.6px;
+    }
+    .mensaje{
+      color:#444;
+      line-height:1.6;
+      font-size:18px;
+      margin:0 auto;
+      max-width:640px;
+      text-align:left;
+    }
+    .mensaje[contenteditable="true"]{
+      outline:2px dashed rgba(224,69,123,0.18);
+      padding:8px;
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(240,240,240,0.06), transparent);
+    }
+    .firma{
+      color:var(--accent);
+      font-style:italic;
+      margin-top:22px;
+      text-align:right;
+      font-size:18px;
+    }
+    .controls{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
+    button{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(224,69,123,0.18);
+    }
+    button.secondary{
+      background:transparent;
+      color:var(--accent);
+      border:2px solid rgba(224,69,123,0.12);
+      box-shadow:none;
+      font-weight:600;
+    }
+    .notice{
+      font-size:13px;
+      color:#666;
+      margin-top:10px;
+      text-align:center;
+    }
+    @media (max-width:480px){
+      .corazon{font-size:64px}
+      h1{font-size:26px}
+      .mensaje{font-size:16px}
+      .firma{font-size:16px}
+      .carta{padding:24px}
+    }
+  </style>
 </head>
 <body>
-  <div class="carta">
-    <div class="corazon">❤️</div>
-    <h1>Feliz Aniversario</h1>
+  <main class="carta" role="main" aria-labelledby="titulo">
+    <div class="corazon" role="img" aria-label="corazón">❤️</div>
+    <h1 id="titulo">Feliz Aniversario</h1>
+
+    <div id="mensaje" class="mensaje" tabindex="0" contenteditable="false" aria-live="polite">
+      <p>Hola, mi amor. Hoy se cumple un año a tu lado y quiero que sepas lo feliz que me haces.</p>
+      <p>Gracias por tu paciencia, tus risas y por quererme tal como soy. Cada día contigo es mi favorito.</p>
+      <p>Te amo muchísimo y deseo que tengamos un día muy feliz.</p>
+      <p class="firma">Con todo mi amor, hoy y siempre.</p>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <button id="editarBtn">✏️ Editar</button>
+      <button id="guardarBtn" class="secondary">💾 Guardar</button>
+      <button id="restaurarBtn" class="secondary">♻️ Restablecer</button>
+      <button id="imprimirBtn" class="secondary">🖨️ Imprimir</button>
+    </div>
+
+    <div class="notice" id="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    // Manejo simple de edición y almacenamiento local
+    const editarBtn = document.getElementById('editarBtn');
+    const guardarBtn = document.getElementById('guardarBtn');
+    const restaurarBtn = document.getElementById('restaurarBtn');
+    const imprimirBtn = document.getElementById('imprimirBtn');
+    const mensaje = document.getElementById('mensaje');
+    const status = document.getElementById('status');
+    const STORAGE_KEY = 'feliz_aniversario_mensaje_v1';
+
+    function loadMensaje(){
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(saved){
+        mensaje.innerHTML = saved;
+        status.textContent = 'Mensaje cargado desde el almacenamiento local.';
+      } else {
+        status.textContent = '';
+      }
+    }
+
+    function saveMensaje(){
+      localStorage.setItem(STORAGE_KEY, mensaje.innerHTML);
+      status.textContent = 'Guardado localmente.';
+      // Desactivar edición tras guardar
+      mensaje.contentEditable = "false";
+      editarBtn.textContent = '✏️ Editar';
+    }
+
+    function resetMensaje(){
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+
+    editarBtn.addEventListener('click', () => {
+      const editing = mensaje.contentEditable === "true";
+      mensaje.contentEditable = editing ? "false" : "true";
+      if(!editing){
+        // focus al inicio
+        mensaje.focus();
+        // mover caret al final
+        const range = document.createRange();
+        range.selectNodeContents(mensaje);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      editarBtn.textContent = editing ? '✏️ Editar' : '✅ Listo';
+      status.textContent = editing ? '' : 'Ahora puedes editar el mensaje.';
+    });
+
+    guardarBtn.addEventListener('click', saveMensaje);
+    restaurarBtn.addEventListener('click', () => {
+      if(confirm('¿Restablecer el mensaje a la versión original?')) resetMensaje();
+    });
+    imprimirBtn.addEventListener('click', () => window.print());
+
+    // Cargar mensaje guardado al inicio
+    loadMensaje();
+  </script>
+</body>
+</html>
